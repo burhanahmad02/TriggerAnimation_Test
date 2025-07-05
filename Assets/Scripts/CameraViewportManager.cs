@@ -15,6 +15,12 @@ public class CameraViewportManager : MonoBehaviour
     public CameraGroup blue;
     public CameraGroup yellow;
 
+    [Header("Characters")]
+    public Transform doctor;
+    public Transform doctoryellow;
+    public Transform manblue;
+    public Transform mangreen;
+
     [Header("Container Box (Normalized Screen Space)")]
     public float containerX = 0.1f;
     public float containerY = 0.1f;
@@ -33,14 +39,39 @@ public class CameraViewportManager : MonoBehaviour
     void Start()
     {
         FocusOn(red);
+        ScaleCharacters(doctor, 1f, doctoryellow, 1f, manblue, 1f, mangreen, 0.3f);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) FocusOn(red);
-        if (Input.GetKeyDown(KeyCode.G)) FocusOn(green);
-        if (Input.GetKeyDown(KeyCode.B)) FocusOn(blue);
-        if (Input.GetKeyDown(KeyCode.Y)) FocusOn(yellow);
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            FocusOn(red);
+            ScaleCharacters(doctor, 1f, doctoryellow, 1f, manblue, 1f, mangreen, 0.3f);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            FocusOn(green);
+            ScaleCharacters(mangreen, 1f, doctor, 0.3f, doctoryellow, 1f, manblue, 1f);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            FocusOn(blue);
+            ScaleCharacters(manblue, 1f, doctor, 1f, doctoryellow, 0.3f, mangreen, 1f);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            FocusOn(yellow);
+            ScaleCharacters(doctoryellow, 1f, doctor, 1f, manblue, 0.3f, mangreen, 1f);
+        }
+    }
+
+    void ScaleCharacters(Transform focus, float focusScale, Transform a, float aScale, Transform b, float bScale, Transform c, float cScale)
+    {
+        focus.DOScale(focusScale, animationDuration).SetEase(Ease.OutSine);
+        a.DOScale(aScale, animationDuration).SetEase(Ease.OutSine);
+        b.DOScale(bScale, animationDuration).SetEase(Ease.OutSine);
+        c.DOScale(cScale, animationDuration).SetEase(Ease.OutSine);
     }
 
     public void FocusOn(CameraGroup target)
@@ -101,13 +132,11 @@ public class CameraViewportManager : MonoBehaviour
         return new Rect(0, 0, 0, 0);
     }
 
-
     void AnimateCamera(CameraGroup group, Rect targetRect)
     {
         if (group.currentTween != null && group.currentTween.IsActive())
             group.currentTween.Kill();
 
-        // Animate all 4 rect properties separately
         float startX = group.cam.rect.x;
         float startY = group.cam.rect.y;
         float startW = group.cam.rect.width;
