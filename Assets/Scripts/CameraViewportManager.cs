@@ -36,11 +36,7 @@ public class CameraViewportManager : MonoBehaviour
 
     private CameraGroup focusedCamera;
 
-    void Start()
-    {
-        FocusOn(red);
-        ScaleCharacters(doctor, 1f, doctoryellow, 1f, manblue, 1f, mangreen, 0.3f);
-    }
+    
 
     void Update()
     {
