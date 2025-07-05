@@ -63,43 +63,44 @@ public class CameraViewportManager : MonoBehaviour
     Rect GetRectFor(string camName, float remainingWidth, float remainingHeight)
     {
         if (focusedCamera == red && camName == "Red")
-            return new Rect(containerX, containerY, focusWidth * containerWidth, focusHeight * containerHeight);
-        if (focusedCamera == red && camName == "Green")
-            return new Rect(containerX + focusWidth * containerWidth, containerY, remainingWidth, focusHeight * containerHeight);
-        if (focusedCamera == red && camName == "Blue")
-            return new Rect(containerX, containerY + focusHeight * containerHeight, focusWidth * containerWidth, remainingHeight);
-        if (focusedCamera == red && camName == "Yellow")
-            return new Rect(containerX + focusWidth * containerWidth, containerY + focusHeight * containerHeight, remainingWidth, remainingHeight);
-
-        if (focusedCamera == green && camName == "Green")
-            return new Rect(containerX + remainingWidth, containerY, focusWidth * containerWidth, focusHeight * containerHeight);
-        if (focusedCamera == green && camName == "Red")
-            return new Rect(containerX, containerY, remainingWidth, focusHeight * containerHeight);
-        if (focusedCamera == green && camName == "Yellow")
-            return new Rect(containerX + remainingWidth, containerY + focusHeight * containerHeight, focusWidth * containerWidth, remainingHeight);
-        if (focusedCamera == green && camName == "Blue")
-            return new Rect(containerX, containerY + focusHeight * containerHeight, remainingWidth, remainingHeight);
-
-        if (focusedCamera == blue && camName == "Blue")
             return new Rect(containerX, containerY + remainingHeight, focusWidth * containerWidth, focusHeight * containerHeight);
-        if (focusedCamera == blue && camName == "Red")
-            return new Rect(containerX, containerY, focusWidth * containerWidth, remainingHeight);
-        if (focusedCamera == blue && camName == "Yellow")
+        if (focusedCamera == red && camName == "Green")
             return new Rect(containerX + focusWidth * containerWidth, containerY + remainingHeight, remainingWidth, focusHeight * containerHeight);
-        if (focusedCamera == blue && camName == "Green")
+        if (focusedCamera == red && camName == "Blue")
+            return new Rect(containerX, containerY, focusWidth * containerWidth, remainingHeight);
+        if (focusedCamera == red && camName == "Yellow")
             return new Rect(containerX + focusWidth * containerWidth, containerY, remainingWidth, remainingHeight);
 
-        if (focusedCamera == yellow && camName == "Yellow")
+        if (focusedCamera == green && camName == "Green")
             return new Rect(containerX + remainingWidth, containerY + remainingHeight, focusWidth * containerWidth, focusHeight * containerHeight);
-        if (focusedCamera == yellow && camName == "Green")
-            return new Rect(containerX + remainingWidth, containerY, focusWidth * containerWidth, remainingHeight);
-        if (focusedCamera == yellow && camName == "Blue")
+        if (focusedCamera == green && camName == "Red")
             return new Rect(containerX, containerY + remainingHeight, remainingWidth, focusHeight * containerHeight);
-        if (focusedCamera == yellow && camName == "Red")
+        if (focusedCamera == green && camName == "Yellow")
+            return new Rect(containerX + remainingWidth, containerY, focusWidth * containerWidth, remainingHeight);
+        if (focusedCamera == green && camName == "Blue")
             return new Rect(containerX, containerY, remainingWidth, remainingHeight);
 
-        return new Rect(0, 0, 0, 0); // Shouldn't hit this
+        if (focusedCamera == blue && camName == "Blue")
+            return new Rect(containerX, containerY, focusWidth * containerWidth, focusHeight * containerHeight);
+        if (focusedCamera == blue && camName == "Red")
+            return new Rect(containerX, containerY + focusHeight * containerHeight, focusWidth * containerWidth, remainingHeight);
+        if (focusedCamera == blue && camName == "Yellow")
+            return new Rect(containerX + focusWidth * containerWidth, containerY, remainingWidth, focusHeight * containerHeight);
+        if (focusedCamera == blue && camName == "Green")
+            return new Rect(containerX + focusWidth * containerWidth, containerY + focusHeight * containerHeight, remainingWidth, remainingHeight);
+
+        if (focusedCamera == yellow && camName == "Yellow")
+            return new Rect(containerX + remainingWidth, containerY, focusWidth * containerWidth, focusHeight * containerHeight);
+        if (focusedCamera == yellow && camName == "Green")
+            return new Rect(containerX + remainingWidth, containerY + focusHeight * containerHeight, focusWidth * containerWidth, remainingHeight);
+        if (focusedCamera == yellow && camName == "Blue")
+            return new Rect(containerX, containerY, remainingWidth, focusHeight * containerHeight);
+        if (focusedCamera == yellow && camName == "Red")
+            return new Rect(containerX, containerY + focusHeight * containerHeight, remainingWidth, remainingHeight);
+
+        return new Rect(0, 0, 0, 0);
     }
+
 
     void AnimateCamera(CameraGroup group, Rect targetRect)
     {
